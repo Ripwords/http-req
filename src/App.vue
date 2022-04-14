@@ -18,6 +18,9 @@ const clear = (apiClear = true) => {
 const submit = () => {
   clear(false)
   responseTime.value = Date.now()
+  if (api.value.indexOf("http://") == 0 || api.value.indexOf("https://") == 0) {
+    api.value = api.value.replace("http://", "https://")
+  }
   fetch(api.value)
     .then(res => res.json())
     .then(res => {
@@ -42,7 +45,7 @@ const submit = () => {
           placeholder="https://api.example.com"  
           @keyup.enter="submit"
         ></n-input>
-        <n-button @click="submit">Enter</n-button>
+        <n-button @click="submit" type="url">Enter</n-button>
       </div>
       <n-button class="mt-5" @click="clear">Clear</n-button>
     </n-card>
