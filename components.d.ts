@@ -4,14 +4,11 @@
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    HTTP: typeof import('./src/components/HTTP.vue')['default']
-    Main: typeof import('./src/components/Main.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCard: typeof import('naive-ui')['NCard']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NInput: typeof import('naive-ui')['NInput']
-    NLabel: typeof import('naive-ui')['NLabel']
   }
 }
 

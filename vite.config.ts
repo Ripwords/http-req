@@ -18,13 +18,8 @@ export default defineConfig({
       }
     }),
     AutoImport({
-      include: [
-        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-        /\.vue$/, /\.vue\?vue/, // .vue
-      ],
-      imports: [
-        'vue'
-      ]
+      imports: ['vue'],
+      dts: 'src/auto-imports.d.ts'
     }),
     Icons({
       autoInstall: true
