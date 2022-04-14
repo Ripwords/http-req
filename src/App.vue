@@ -7,20 +7,27 @@ const api = ref("")
 const response = ref<any>()
 const responseTime = ref()
 
+const clear = (apiClear = true) => {
+  if (apiClear) {
+    api.value = ""
+  }
+  response.value = null
+  responseTime.value = null
+}
+
 const submit = () => {
-  const start = Date.now()
+  clear(false)
+  responseTime.value = Date.now()
   fetch(api.value)
     .then(res => res.json())
     .then(res => {
       response.value = res
-      responseTime.value = Date.now() - start
+      responseTime.value = Date.now() - responseTime.value
     })
-}
-
-const clear = () => {
-  api.value = ""
-  response.value = null
-  responseTime.value = null
+    .catch(err => {
+      response.value = err
+      responseTime.value = Date.now() - responseTime.value
+    })
 }
 </script>
 
@@ -37,18 +44,22 @@ const clear = () => {
         ></n-input>
         <n-button @click="submit">Enter</n-button>
       </div>
-      <Transition>
-        <n-button v-if="response != null" class="mt-5" @click="clear">Clear</n-button>
-      </Transition>
+      <n-button class="mt-5" @click="clear">Clear</n-button>
     </n-card>
   </div>
   <Transition>
-    <div v-if="response != null" class="flex justify-center mt-10">
+    <div v-if="responseTime" class="flex justify-center mt-10">
       <n-card title="Response" class="max-w-[700px] min-w-[300px]">
-        Response time: {{ responseTime }}ms
-        <ssh-pre language="json" label="JSON Response" reactive copy-button dark>
-          {{ response }}
-        </ssh-pre>
+        <template #header>
+          <n-skeleton v-if="!response" text width="60%" />
+        </template>
+        <n-skeleton v-if="!response" text :repeat="6" />
+        <div v-else>
+          Response time: {{ responseTime }}ms
+          <ssh-pre language="json" label="JSON Response" reactive copy-button dark>
+            {{ response }}
+          </ssh-pre>
+        </div>
       </n-card>
     </div>
   </Transition>

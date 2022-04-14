@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NInput: typeof import('naive-ui')['NInput']
+    NSkeleton: typeof import('naive-ui')['NSkeleton']
   }
 }
 
