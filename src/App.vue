@@ -36,7 +36,7 @@ const submit = () => {
 
 <template>
 <n-config-provider :theme="darkTheme">
-  <div class="flex justify-center mt-10">
+  <div class="flex justify-center mt-10 mx-3">
     <n-card title="HTTP-Req" class="max-w-[700px] min-w-[300px]">
       API link
       <div class="flex mt-2">
@@ -51,7 +51,7 @@ const submit = () => {
     </n-card>
   </div>
   <Transition>
-    <div v-if="responseTime" class="flex justify-center mt-10">
+    <div v-if="responseTime" class="flex justify-center mt-10 mx-3">
       <n-card title="Response" class="max-w-[700px] min-w-[300px]">
         <template #header>
           <n-skeleton v-if="!response" text width="60%" />
